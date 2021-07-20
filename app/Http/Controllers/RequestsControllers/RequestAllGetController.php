@@ -6,7 +6,7 @@ use App\Models\RequestOrder;
 use Illuminate\Routing\Controller;
 
 
-class RequestGetAllController extends Controller
+class RequestAllGetController extends Controller
 {
     /**
      * Handle the incoming request.
