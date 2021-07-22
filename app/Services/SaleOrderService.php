@@ -5,6 +5,7 @@ use App\Models\SaleOrder;
 use App\Repositories\SaleOrderRepository;
 use App\Services\Interfaces\SaleOrderServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class SaleOrderService implements SaleOrderServiceInterface
 {
@@ -38,7 +39,20 @@ class SaleOrderService implements SaleOrderServiceInterface
     {
     	DB::transaction(function () use ($data, $id){
 
-    		$this->saleOrderRepository->update($data, $id);
+            $this->saleOrderRepository->update($data, $id);
+
+            $saleOrder = SaleOrder::find($id);
+
+            $idItem = $saleOrder->items->pluck('id')->all();
+
+            $idCompare = Arr::pluck($data['items'], 'id');
+
+            $notIn = array_values(array_diff($idItem, $idCompare));
+
+            if (!empty($notIn))
+                {
+                    $saleOrder->items()->whereIn('id', $notIn)->delete();
+                }
 
     		foreach($data['items'] as $item)
     		{

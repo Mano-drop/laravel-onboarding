@@ -4,11 +4,18 @@ namespace App\Http\Controllers\InvoiceControllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Models\Invoice;
-use App\Models\InvoiceItem;
+use App\Services\InvoiceServices\InvoicePostService;
+
 
 class InvoicePostController extends Controller
 {
+    private $service;
+
+    public function __construct(InvoicePostService $invoicePostService)
+    {
+        $this->service = $invoicePostService;
+    }
+
     /**
      * Handle the incoming request.
      *
@@ -16,16 +23,6 @@ class InvoicePostController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $invoice = Invoice::create($request->all());
-
-        $invoiceItems = [];
-
-        foreach ($request->items as $item) {
-            $invoiceItems[] = new InvoiceItem($item);
-        }
-
-        $invoice->invoiceItems()->saveMany($invoiceItems);
-
-        return response()->json($invoice);
+        return $this->service->create($request);
     }
 }

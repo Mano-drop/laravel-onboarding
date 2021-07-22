@@ -14,5 +14,6 @@ class InvoiceItem extends Model
         'amount',
         'price',
         'subtotal',
+        'invoice_id'
     ];
 }

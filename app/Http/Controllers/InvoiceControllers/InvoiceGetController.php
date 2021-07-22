@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\InvoiceControllers;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Routing\Controller;
-use App\Models\Invoice;
+use App\Services\InvoiceServices\InvoiceGetService;
 
 class InvoiceGetController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $service;
+
+    public function __construct(InvoiceGetService $invoiceGetService)
+    {
+        $this->service = $invoiceGetService;
+    }
+
     public function __invoke($id)
     {
-        $invoice = Invoice::find($id);
-
-        $invoice->invoiceItems;
-
-        return response()->json($invoice);
+        return $this->service->readById($id);
     }
 }
