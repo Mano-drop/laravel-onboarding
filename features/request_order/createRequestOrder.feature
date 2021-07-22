@@ -5,16 +5,16 @@
 			"""
 		{
             "date": "2021-07-08",
-            "created_by": "Reina",
-            "status": "compldetado",
-            "observations": "Para defenderse",
+            "created_by": "caballero",
+            "status": "vivo",
+            "observations": "ginete",
             "itemsRequests": [
                 {
-                    "product_name": "escudos",
-                    "amount": "150"
+                    "product_name": "armadura",
+                    "amount": "5"
                 }
             ]
         }
         	"""
-        When I post link "api/request_order_api"
+        When I post link "api/request_order"
         Then The result will be "excellent"

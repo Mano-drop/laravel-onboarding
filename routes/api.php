@@ -36,8 +36,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/request_order_api', \App\Http\Controllers\RequestOrderController::class);
-
 Route::get('sale_order', SaleOrderAllGetController::class);
 
 Route::post('sale_order', SaleOrderPostController::class);
@@ -61,7 +59,7 @@ Route::delete('invoice/{id}', InvoiceDeleteController::class);
 
 Route::put('invoice/{id}', InvoicePutController::class);
 
-
+//Request Order routes
 Route::post('request_order', RequestCreateController::class);
 Route::get('request_order', RequestAllGetController::class);
 Route::get('request_order/{id}', RequestGetController::class);

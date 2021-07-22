@@ -18,5 +18,5 @@
         ]
     }
         """
-        When I put link "api/request_order_api/15"
+        When I put link "api/request_order/15"
         Then The result will be "excellent"
